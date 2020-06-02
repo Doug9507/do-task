@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Do Task</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" href="src/css/main.css" />
+	</head>
+	<body>
+		<div id="app">
+			<div class="container-fluid columna my-5 wrap">
+				<div class="text-center">
+					<h1>
+						<i
+							><span class="material-icons icono">
+								assignment_ind
+							</span>
+							Agenda 2020</i
+						>
+					</h1>
+				</div>
+
+				<div class="form-group">
+					<input
+						type="text"
+						class="form-control my-3"
+						v-model="nuevaTarea"
+						@keyup.enter="agregarTarea"
+					/>
+					<input
+						type="button"
+						class="btn btn-primary btn-md"
+						value="Guardar"
+						@click="agregarTarea"
+					/>
+				</div>
+				<div>
+					<h5><i>Lista de Tareas</i></h5>
+					<div v-for="(tarea,index) of tareas">
+						<div class="task" :class="['alert', tarea.estado ? 'alert-success' : 'alert-warning']">
+							<!-- <div><strong>{{tarea.nombre}} - <span v-if="!tarea.estado ? tarea.estado = 'Realizado' : tarea.estado='Pendiente'">{{tarea.estado}}</span></strong></div> -->
+							<div>
+								<strong
+									>{{index + 1}}. {{tarea.nombre.toUpperCase()}} -
+									<span>{{tarea.estado}}</span></strong
+								>
+							</div>
+							<div>
+								<input
+									type="button"
+									class="btn btn-success btn-xs"
+									value="OK"
+									@click="tareaRealizado(index)"
+								/>
+								<input
+									type="button"
+									class="btn btn-danger btn-xs"
+									value="X"
+									@click="tareaEliminado(index)"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="src/js/main.js"></script>
+</html>
