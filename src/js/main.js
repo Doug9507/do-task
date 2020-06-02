@@ -13,7 +13,7 @@ const app = new Vue({
 				localStorage.setItem("tareas", JSON.stringify(this.tareas));
 				this.nuevaTarea = "";
 			} else {
-				swal("No seas imbecil!", "Escribe algo!", "warning");
+				swal("Alto!", "Escribe algo!", "warning");
 			}
 		},
 		tareaRealizado(index) {
