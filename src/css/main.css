@@ -1,27 +1,273 @@
+* {
+	font-family: "Handlee", cursive;
+}
 body {
-	width: 100vw;
-	height: 100vh;
 	margin: 0;
 	box-sizing: border-box;
-	display: flex;
-	justify-content: start;
-	align-items: center;
-	flex-direction: column;
+	background-color: var(--baseColor);
 }
-.columna {
-	width: 600px;
+:root {
+	--baseColor: white;
+	--headerColor: linear-gradient(to bottom, #05371f, #145535, #23744e, #329568, #41b883);
+	--footerColor: #475050;
+	--buttonColor: linear-gradient(to bottom, #08f684, #1de686, #2bd786, #37c785, #41b883);
+	--shadowColorHeader: #f0f3fa;
+	--cardShadowColor: #7f717e;
+	--white-text: #fafbfd;
+	--gray-text: #5f616d;
+	--vue-color: #37a171;
 }
-.icono {
-	font-size: 30px;
+
+/* cover section */
+main {
+	margin-bottom: 150px;
 }
-.wrap {
-	border: #4682b4 solid;
-	padding: 40px;
+.cover {
+	display: grid;
+	grid-template-rows: 200px 1fr 150px;
+}
+
+/* wrappper section */
+.wrapper {
+	padding: 0 1em;
+}
+
+/* header section */
+.header {
+	background: var(--headerColor);
+	border-radius: 0 0 15px 15px;
+	color: var(--baseColor);
+	box-shadow: 0px 7px 2px var(--shadowColorHeader);
+	font-weight: bold;
+}
+.header-title {
+	border-bottom: 1px solid var(--shadowColorHeader);
+	padding-bottom: 0.5em;
+	padding-top: 1em;
+	margin: 0;
+	font-weight: bold;
+}
+.header-subtitle {
+	color: var(--white-text);
+}
+
+/* section save */
+
+.save-zone {
+	margin: auto;
+	width: 300px;
+	border: 1px solid var(--shadowColorHeader);
+	box-shadow: 0px 0px 5px var(--cardShadowColor);
+	padding-top: 2.5em;
+	padding-bottom: 2.5em;
+	display: grid;
+	grid-template-columns: 250px;
+	justify-content: center;
+	row-gap: 1.5em;
+	margin-top: -50px;
+	background-color: var(--baseColor);
+	border-radius: 15px;
+}
+.save-zone-description {
+	margin: 0;
+	text-align: center;
+	font-size: 0.9em;
+	font-weight: bold;
+	color: var(--gray-text);
+}
+.save-zone-box {
+	border-style: none;
+	position: relative;
+	width: 100%;
+	padding-bottom: 0.3em;
+}
+.save-zone-box-before {
+	position: relative;
+}
+.save-zone-box-before:after {
+	content: "";
+	display: block;
+	background-color: var(--vue-color);
+	position: absolute;
+	height: 1px;
+	left: 0;
+	right: 0;
+}
+
+.save-zone-button {
+	padding: 10px;
+	border: 1px solid #7f717e;
+	border-radius: 50px;
+	cursor: pointer;
+	background: var(--buttonColor);
+	color: var(--white-text);
+	letter-spacing: 5px;
+	font-weight: bold;
+}
+
+/* task section */
+.card-section {
+	margin-top: 4em;
+	margin-bottom: 2em;
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 15px;
+}
+.card {
+	padding-left: 1em;
+	border: 1px solid var(--white-text);
+	box-shadow: 0px 0px 5px #7f717e;
+	border-radius: 10px;
+	position: relative;
+	overflow: hidden;
+}
+.card.realizado:before {
+	content: "";
+	display: block;
+	background-color: darkcyan;
 	height: 100%;
-	box-shadow: 5px 10px 18px #4682b4;
+	width: 5px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
 }
-.task {
+.card.pendiente:before {
+	content: "";
+	display: block;
+	background-color: orangered;
+	height: 100%;
+	width: 5px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.card-content {
+	display: grid;
+	row-gap: 8px;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	font-size: 0.9em;
+}
+
+.card-content img {
+	margin-right: 15px;
+}
+
+.card-content-main.buttons {
 	display: flex;
-	justify-content: space-between;
+	justify-content: end;
+	margin: 0;
+}
+.card-content-main .button-did,
+.card-content-main .button-delete {
+	cursor: pointer;
+	border: 1px solid var(--cardShadowColor);
+	border-radius: 50px;
+	margin-right: 10px;
+	color: var(--white-text);
+}
+.card-content-main .button-did {
+	background-color: #168ef4;
+}
+.card-content-main .button-did.unshow {
+	display: none;
+}
+.card-content-main .button-delete {
+	background-color: #ef5350;
+}
+.situation {
+	display: flex;
 	align-items: center;
+	justify-content: space-between;
+}
+.situation-description.check {
+	text-decoration: line-through;
+	color: var(--gray-text);
+}
+.situation-current.pending {
+	margin-right: 15px;
+	color: var(--white-text);
+	background-color: #f17808;
+	padding: 2px;
+	border-radius: 12px;
+}
+.situation-current.done {
+	margin-right: 15px;
+	color: var(--white-text);
+	background-color: #12947f;
+	padding: 2px;
+	border-radius: 12px;
+}
+/* footer */
+.footer {
+	background-color: var(--footerColor);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.footer p {
+	text-align: center;
+}
+.footer p a {
+	color: var(--white-text);
+	text-decoration: none;
+}
+/* media queries */
+@media screen and (min-width: 480px) {
+	.card-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		row-gap: 1.5em;
+		column-gap: 1.5em;
+	}
+
+	.save-zone {
+		margin: auto;
+		margin-top: -50px;
+	}
+	.cover {
+		grid-template-rows: 200px 1fr 100px;
+	}
+	main {
+		margin-bottom: 100px;
+	}
+}
+@media screen and (min-width: 768px) {
+	.card-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		row-gap: 1.5em;
+		column-gap: 1.5em;
+	}
+	.save-zone {
+		padding: 2.5em 3em;
+		display: grid;
+		grid-template-columns: 1fr;
+		row-gap: 1.5em;
+		margin-top: -50px;
+		background-color: var(--baseColor);
+		border-radius: 15px;
+	}
+	.cover {
+		grid-template-rows: 200px 1fr 100px;
+	}
+	main {
+		margin-bottom: 100px;
+	}
+}
+@media screen and (min-width: 1024px) {
+	.card-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		row-gap: 1.5em;
+		column-gap: 1.5em;
+	}
+	.cover {
+		grid-template-rows: 200px 1fr 100px;
+	}
+	main {
+		margin-bottom: 100px;
+	}
 }
