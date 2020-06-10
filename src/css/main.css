@@ -87,6 +87,9 @@ main {
 .save-zone-box:focus {
 	outline: none;
 }
+.save-zone-button:focus {
+	outline: none;
+}
 .save-zone-box-before:after {
 	content: "";
 	display: block;
