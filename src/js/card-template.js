@@ -16,30 +16,23 @@ const card = {
 			<p class="card-content-main buttons">
 				<button v-if="tarea.estado == 1"
 						class="button-doing"
-						:class="showButton"
-						@click="tareaRealizando()"
+						@click="taskAction('doing')"
 					>
 						Doing
 					</button>
 					<button v-if="tarea.estado == 2"
 						class="button-done"
-						@click="tareaRealizado()"
+						@click="taskAction('done')"
 					>
 						Done
 					</button>
-					<button class="button-delete" @click="tareaEliminado()">Delete</button>
+					<button class="button-delete" @click="taskAction('delete')">Delete</button>
 			</p>
 	</div>
   `,
 	methods: {
-		tareaRealizando() {
-			this.$emit("indexDoingTask", this.tarea.nombre);
-		},
-		tareaRealizado() {
-			this.$emit("indexDoneTask", this.tarea.nombre);
-		},
-		tareaEliminado() {
-			this.$emit("indexDeleteTask", this.tarea.nombre);
+		taskAction(name) {
+			this.$emit("indexTaskAction", this.tarea.nombre, name);
 		},
 	},
 	computed: {

@@ -16,11 +16,11 @@
 					<div class="wrapper-list">
 						<section class="todo">
 							<cardheader :message="message.pending" :counter="tareas.length"></cardheader>
-							<cards :tareas="tareas" />
+							<cards :tareas="tareas" mover-a="doingTask" />
 						</section>
 						<section class="doing">
 							<cardheader :message="message.doing" :counter="doingTask.length"></cardheader>
-							<cards :tareas="doingTask" />
+							<cards :tareas="doingTask" mover-a="doneTask" />
 						</section>
 						<section class="done">
 							<cardheader :message="message.done" :counter="doneTask.length"></cardheader>
