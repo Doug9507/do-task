@@ -4,82 +4,35 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Do Task</title>
-		<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
 		<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="src/css/main.css" />
 	</head>
 	<body>
 		<div id="app" class="cover">
-			<header class="header">
-				<div class="wrapper">
-					<h1 class="header-title">
-						Check out your tasks
-					</h1>
-					<p class="header-subtitle">Finish your pending tasks...</p>
-				</div>
-			</header>
+			<headerview></headerview>
 			<main>
 				<div class="wrapper">
-					<section class="save-zone">
-						<div class="save-zone-box-before">
-							<input
-								v-model="nuevaTarea"
-								type="text"
-								class="save-zone-box"
-								placeholder="Add a new task..."
-								@keyup.enter="agregarTarea"
-							/>
-						</div>
-						<input type="button" value="SAVE" class="save-zone-button" @click="agregarTarea" />
-						<p class="save-zone-description">Add more task...</p>
-					</section>
-					<section class="card-section">
-						<div
-							class=""
-							:class="['card', tarea.estado ? 'realizado' : 'pendiente']"
-							v-for="(tarea, index) of tareas"
-						>
-							<div class="card-content">
-								<!-- <p class="card-content-main"> -->
-								<div class="situation">
-									<div class="situation">
-										<img src="src/img/laptop-icon.svg" alt="icon" />
-										<p class="" :class="['situation-description',(tarea.estado)?'check':'uncheck']">
-											<strong>{{tarea.nombre}}</strong>
-										</p>
-									</div>
-									<p class="" :class="['situation-current',tarea.estado ? 'done':'pending']">
-										{{(tarea.estado) ? 'Done' : 'Pending'}}
-									</p>
-								</div>
-								<!-- </p> -->
-								<p class="card-content-main buttons">
-									<button
-										class=""
-										:class="['button-did',(tarea.estado) ? 'unshow' : 'show']"
-										@click="tareaRealizado(index)"
-									>
-										Done
-									</button>
-									<button class="button-delete" @click="tareaEliminado(index)">Delete</button>
-								</p>
-							</div>
-						</div>
-					</section>
+					<formview></formview>
+					<div class="wrapper-list">
+						<section class="todo">
+							<cardheader :message="message.pending" :counter="tareas.length"></cardheader>
+							<cards :tareas="tareas" />
+						</section>
+						<section class="doing">
+							<cardheader :message="message.doing" :counter="doingTask.length"></cardheader>
+							<cards :tareas="doingTask" />
+						</section>
+						<section class="done">
+							<cardheader :message="message.done" :counter="doneTask.length"></cardheader>
+							<cards :tareas="doneTask" />
+						</section>
+					</div>
 				</div>
 			</main>
-			<footer class="footer">
-				<p>
-					<a href="https://github.com/Doug9507" target="_blank"
-						><img src="src/img/github.svg" alt="github" /><span style="display: block;"
-							>Follow: @Doug9507</span
-						></a
-					>
-				</p>
-			</footer>
+			<footerview></footerview>
 		</div>
 	</body>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="src/js/main.js"></script>
+	<script src="src/js/main.js" type="module"></script>
 </html>

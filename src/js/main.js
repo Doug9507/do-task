@@ -1,35 +1,43 @@
+import headerview from "./header-view-template.js";
+import cards from "./card-list-template.js";
+import cardheader from "./cards-header-template.js";
+import footerview from "./footer-view-template.js";
+import formview from "./form-view-template.js";
+
 const app = new Vue({
 	el: "#app",
 	data: {
 		tareas: [],
-		nuevaTarea: "",
+		doingTask: [],
+		doneTask: [],
+		message: { pending: "To Do", doing: "Doing", done: "Done" },
 	},
-	methods: {
-		agregarTarea() {
-			if (this.nuevaTarea !== "") {
-				this.tareas.push({ nombre: this.nuevaTarea, estado: false });
-				localStorage.setItem("tareas", JSON.stringify(this.tareas));
-				this.nuevaTarea = "";
-			} else {
-				swal("Stop!", "You  must write something...!", "warning");
-			}
-		},
-		tareaRealizado(index) {
-			this.tareas[index].estado = true;
-			localStorage.setItem("tareas", JSON.stringify(this.tareas));
-		},
-		tareaEliminado(index) {
-			this.tareas.splice(index, 1);
-			localStorage.setItem("tareas", JSON.stringify(this.tareas));
-		},
-	},
+	methods: {},
 	created: function () {
-		console.log(JSON.parse(localStorage.getItem("tareas")));
-		const localDB = JSON.parse(localStorage.getItem("tareas"));
-		if (localDB) {
-			this.tareas = localDB;
+		const localDBtodo = JSON.parse(localStorage.getItem("tareas"));
+		const localDBdoing = JSON.parse(localStorage.getItem("tareasDoing"));
+		const localDBdone = JSON.parse(localStorage.getItem("tareasDone"));
+		if (localDBtodo) {
+			this.tareas = localDBtodo;
 		} else {
 			this.tareas = [];
 		}
+		if (localDBdoing) {
+			this.doingTask = localDBdoing;
+		} else {
+			this.doingTask = [];
+		}
+		if (localDBdone) {
+			this.doneTask = localDBdone;
+		} else {
+			this.doneTask = [];
+		}
+	},
+	components: {
+		headerview,
+		formview,
+		cardheader,
+		cards,
+		footerview,
 	},
 });

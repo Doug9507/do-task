@@ -4,14 +4,15 @@
 body {
 	margin: 0;
 	box-sizing: border-box;
-	background-color: var(--baseColor);
+	background-color: var(--body-color);
 }
 :root {
+	--body-color: #f0f2f5;
 	--baseColor: white;
 	--headerColor: linear-gradient(to bottom, #05371f, #145535, #23744e, #329568, #41b883);
 	--footerColor: #475050;
 	--buttonColor: linear-gradient(to bottom, #08f684, #1de686, #2bd786, #37c785, #41b883);
-	--shadowColorHeader: #f0f3fa;
+	--shadowColorHeader: #e1e3e6;
 	--cardShadowColor: #7f717e;
 	--white-text: #fafbfd;
 	--gray-text: #5f616d;
@@ -19,12 +20,10 @@ body {
 }
 
 /* cover section */
-main {
-	margin-bottom: 150px;
-}
 .cover {
 	display: grid;
-	grid-template-rows: 200px 1fr 150px;
+	grid-template-rows: 200px 1fr 1fr;
+	height: 100vh;
 }
 
 /* wrappper section */
@@ -57,7 +56,7 @@ main {
 	margin: auto;
 	width: 300px;
 	border: 1px solid var(--shadowColorHeader);
-	box-shadow: 0px 0px 5px var(--cardShadowColor);
+	box-shadow: 0px 0px 10px var(--cardShadowColor);
 	padding-top: 2.5em;
 	padding-bottom: 2.5em;
 	display: grid;
@@ -112,22 +111,53 @@ main {
 }
 
 /* task section */
-.card-section {
+.wrapper-list {
 	margin-top: 4em;
 	margin-bottom: 2em;
 	display: grid;
+	grid-template-rows: 1fr;
 	grid-template-columns: 1fr;
-	row-gap: 15px;
+	grid-template-areas:
+		"todo"
+		"doing"
+		"done";
+	column-gap: 1em;
+}
+.wrapper-list-title {
+	margin-left: 1.5em;
+	display: grid;
+	grid-template-columns: 30px 1fr;
+	align-items: center;
+}
+.todo {
+	grid-area: todo;
 }
 .card {
+	margin: 1em;
 	padding-left: 1em;
 	border: 1px solid var(--white-text);
-	box-shadow: 0px 0px 5px #7f717e;
+	box-shadow: 0px 0px 8px var(--cardShadowColor);
 	border-radius: 10px;
 	position: relative;
 	overflow: hidden;
+	margin-bottom: 1.5em;
+	transition: 300ms;
+	background-color: var(--baseColor);
 }
-.card.realizado:before {
+.card:hover {
+	transform: scale(1.1);
+}
+.card.todo:before {
+	content: "";
+	display: block;
+	background-color: #a0a187;
+	height: 100%;
+	width: 5px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.card.done:before {
 	content: "";
 	display: block;
 	background-color: darkcyan;
@@ -137,7 +167,7 @@ main {
 	left: 0;
 	bottom: 0;
 }
-.card.pendiente:before {
+.card.doing:before {
 	content: "";
 	display: block;
 	background-color: orangered;
@@ -152,13 +182,8 @@ main {
 	row-gap: 8px;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
-	padding-top: 1em;
 	padding-bottom: 1em;
 	font-size: 0.9em;
-}
-
-.card-content img {
-	margin-right: 15px;
 }
 
 .card-content-main.buttons {
@@ -166,7 +191,8 @@ main {
 	justify-content: end;
 	margin: 0;
 }
-.card-content-main .button-did,
+.card-content-main .button-done,
+.card-content-main .button-doing,
 .card-content-main .button-delete {
 	cursor: pointer;
 	border: 1px solid var(--cardShadowColor);
@@ -174,11 +200,11 @@ main {
 	margin-right: 10px;
 	color: var(--white-text);
 }
-.card-content-main .button-did {
-	background-color: #168ef4;
+.card-content-main .button-doing {
+	background-color: #f17808;
 }
-.card-content-main .button-did.unshow {
-	display: none;
+.card-content-main .button-done {
+	background-color: #168ef4;
 }
 .card-content-main .button-delete {
 	background-color: #ef5350;
@@ -192,7 +218,14 @@ main {
 	text-decoration: line-through;
 	color: var(--gray-text);
 }
-.situation-current.pending {
+.situation-current.todo {
+	margin-right: 15px;
+	color: var(--white-text);
+	background-color: #a0a187;
+	padding: 2px;
+	border-radius: 12px;
+}
+.situation-current.doing {
 	margin-right: 15px;
 	color: var(--white-text);
 	background-color: #f17808;
@@ -222,25 +255,25 @@ main {
 }
 /* media queries */
 @media screen and (min-width: 480px) {
-	.card-section {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		row-gap: 1.5em;
-		column-gap: 1.5em;
+	.wrapper-list {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-areas:
+			"todo doing"
+			"done done";
 	}
-
 	.save-zone {
 		margin: auto;
 		margin-top: -50px;
 	}
 	.cover {
-		grid-template-rows: 200px 1fr 100px;
-	}
-	main {
-		margin-bottom: 100px;
+		grid-template-rows: 200px 1fr 0.3fr;
 	}
 }
 @media screen and (min-width: 768px) {
+	.wrapper-list {
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-areas: "todo doing done";
+	}
 	.card-section {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -257,10 +290,7 @@ main {
 		border-radius: 15px;
 	}
 	.cover {
-		grid-template-rows: 200px 1fr 100px;
-	}
-	main {
-		margin-bottom: 100px;
+		grid-template-rows: 200px 1fr 0.3fr;
 	}
 }
 @media screen and (min-width: 1024px) {
@@ -271,9 +301,6 @@ main {
 		column-gap: 1.5em;
 	}
 	.cover {
-		grid-template-rows: 200px 1fr 100px;
-	}
-	main {
-		margin-bottom: 100px;
+		grid-template-rows: 200px 1fr 0.3fr;
 	}
 }
